@@ -14,6 +14,10 @@ switch ($route) {
   case 'contact':
     require_once 'Controllers/contactController.php';
     break;
+  default: ?>
+    <h1>Erreur 404</h1>
+    <p>La page demandée n'existe pas.</p>
+  <?php break;
 }
 
 require_once 'Views/footer.php';
