@@ -5,6 +5,16 @@ services:
       - "80:80"
     depends_on:
       - db
+    environment:
+      DB_HOST: db
+      DB_DATABASE: lacosina
+      DB_USERNAME: root
+      DB_PASSWORD: rootpwd
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_DESTINATION: ${SMTP_DESTINATION}
+      SMTP_DESTINATION_NAME: ${SMTP_DESTINATION_NAME}
     volumes:
       - ./src:/var/www/html
 
