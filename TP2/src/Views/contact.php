@@ -16,6 +16,12 @@
       <label for="description" class="form-label">Description</label>
       <textarea type="text" class="form-control" name="description" id="description" placeholder="Bonjour, ..." required rows="3"></textarea>
     </div>
+
+    <div class="mb-3">
+      <label for="receiveCopy" class="form-label">Recevoir une copie</label>
+      <input type="checkbox" name="receiveCopy" id="receiveCopy">
+    </div>
+
     <div class="mb-3">
       <button type="submit" class="btn btn-primary" id="enregistrer">
         Enregistrer

@@ -22,6 +22,7 @@ if ($type == 'recette') {
 }
 else if ($type == 'contact') {
   $mail = new PHPMailer(true);
+  $receiveCopy = isset($_POST['receiveCopy']) && $_POST['receiveCopy'] == 'on';
 
   try {
     // Server settings
@@ -36,6 +37,10 @@ else if ($type == 'contact') {
     // Recipients
     $mail->setFrom(getenv("SMTP_USERNAME"), 'lacosina');
     $mail->addAddress(getenv("SMTP_DESTINATION"), getenv("SMTP_DESTINATION_NAME"));
+
+    if ($receiveCopy) {
+      $mail->addCC($auteur, $titre);
+    }
 
     // Content
     $mail->isHTML(false);
