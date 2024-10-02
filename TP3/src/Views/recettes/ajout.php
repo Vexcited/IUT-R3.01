@@ -1,9 +1,7 @@
 <main>
   <h1>Ajouter une recette</h1>
 
-  <form action="/?c=enregistrer" method="POST">
-    <input hidden name="type" value="recette">
-
+  <form action="/?c=enregistrer_recette" method="POST">
     <div class="mb-3">
       <label for="titre" class="form-label">Titre de la recette</label>
       <input type="text" class="form-control" name="titre" id="titre" required>
