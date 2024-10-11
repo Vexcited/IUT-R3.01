@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let recipes = document.querySelectorAll(".recipe");
   recipes.forEach((recipe) => {
     recipe.addEventListener("mouseover", () => {
-      recipe.computedStyleMap.backgroundColor = "lightgray";
+      recipe.style.backgroundColor = "lightgray";
     });
 
     recipe.addEventListener("mouseout", () => {
-      recipe.computedStyleMap.backgroundColor = "";
+      recipe.style.backgroundColor = "";
     });
 
     recipe.addEventListener("click", (event) => {
