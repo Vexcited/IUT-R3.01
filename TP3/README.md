@@ -2,7 +2,7 @@
 
 ## Inputs : Recettes
 
-###  Treipaïs
+### Treipaïs
 
 Le « Treipaïs » est une spécialité pâtissière du Limousin créé par un groupement de pâtissiers locaux. Il est composé de trois textures et de trois parfums : un fond de feuilletine, une mousse aux châtaignes, une mousse au chocolat noir, un biscuit à la noisette et un glaçage au chocolat, surmonté d'un « marron » glacé et de deux feuilles vertes en pâte d'amandes.
 
