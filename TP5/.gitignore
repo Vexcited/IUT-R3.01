@@ -1,0 +1,6 @@
+.env*
+!.env.example
+src/upload/*
+!src/upload/.gitkeep
+!src/upload/no-image.jpg
+!src/upload/profil.png

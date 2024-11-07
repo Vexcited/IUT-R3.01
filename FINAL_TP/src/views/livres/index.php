@@ -32,5 +32,3 @@
 
   <a href="/?action=accueil" class="btn btn-primary">Retour à l'accueil</a>
 </main>
-
-<script src="/Views/front.js"></script>
