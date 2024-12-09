@@ -1,0 +1,31 @@
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_DATABASE: bibliotek
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    volumes:
+      - ./src:/var/www/html
+
+  db:
+    image: mysql:8.1.0
+    environment:
+      MYSQL_DATABASE: bibliotek
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
