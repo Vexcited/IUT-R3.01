@@ -2,21 +2,16 @@ services:
   web:
     build: .
     ports:
-      - "80:80"
+      - "8888:80"
     depends_on:
       - db
-    environment:
-      DB_HOST: db
-      DB_DATABASE: bibliotek
-      DB_USERNAME: root
-      DB_PASSWORD: root
     volumes:
       - ./src:/var/www/html
 
   db:
     image: mysql:8.1.0
     environment:
-      MYSQL_DATABASE: bibliotek
+      MYSQL_DATABASE: pupillenetwork
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"

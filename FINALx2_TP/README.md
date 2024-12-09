@@ -1,8 +1,3 @@
 # TP final (noté)
 
-## Mise en place
-
-```bash
-# Permet de générer le dossier vendor/
-compose update
-```
+Le point d'entré se trouve dans `src/index.php`.
