@@ -3,6 +3,7 @@ ob_start();
 session_start();
 
 require_once 'models/Database.php';
+require_once 'models/Date.php';
 
 require_once 'models/User.php';
 require_once 'models/Post.php';
