@@ -80,7 +80,7 @@ require_once 'views/header.php';
                   </svg>
 
                   <svg class="post-modify-active-logo hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.7 6.99999C21.1 6.59999 21.1 5.99999 20.7 5.59999L18.4 3.29999C18 2.89999 17.4 2.89999 17 3.29999L15.2 5.09999L19 8.89999M3 17.2V21H6.8L17.8 9.89999L14.1 6.09999L3 17.2ZM3.9 2.39999L6 4.49999L8.1 2.39999L9.5 3.79999L7.4 5.89999L9.5 7.99999L8.1 9.49999L6 7.39999L3.9 9.49999L2.5 8.09999L4.6 5.99999L2.5 3.79999L3.9 2.39999Z" fill="currentColor" />
+                    <path d="M21 7.00003L9 19L3.5 13.5L4.91 12.09L9 16.17L19.59 5.59003L21 7.00003Z" fill="currentColor"/>
                   </svg>
                 </button>
               </div>
@@ -90,7 +90,7 @@ require_once 'views/header.php';
           <hr class="border-[#4C4F69]/20 dark:border-[#CAD3F5]/20">
 
           <div class="p-6">
-            <h2 class="text-xl font-medium" id="<?= $post['id'] . '-title' ?>">
+            <h2 class="text-2xl font-medium" id="<?= $post['id'] . '-title' ?>">
               <?= $post['titre'] ?>
             </h2>
 
@@ -104,7 +104,7 @@ require_once 'views/header.php';
 
             <div class="mt-4 mb-6 flex items-center justify-center gap-4">
               <div class="relative">
-                <button title="Like" type="button" onclick="react(<?= $post['id'] ?>, 'up')" class="transition-all text-4xl hover:scale-110 dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Like" type="button" onclick="react(<?= $post['id'] ?>, 'up')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
                   👍
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-up">
@@ -112,7 +112,7 @@ require_once 'views/header.php';
                 </span>
               </div>
               <div class="relative">
-                <button title="Amusant" type="button" onclick="react(<?= $post['id'] ?>, 'lmfao')" class="transition-all text-4xl hover:scale-110 dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Amusant" type="button" onclick="react(<?= $post['id'] ?>, 'lmfao')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
                   🤣
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-lmfao">
@@ -120,7 +120,7 @@ require_once 'views/header.php';
                 </span>
               </div>
               <div class="relative">
-                <button title="Adore" type="button" onclick="react(<?= $post['id'] ?>, 'love')" class="transition-all text-4xl hover:scale-110 dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Adore" type="button" onclick="react(<?= $post['id'] ?>, 'love')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
                   ❤️
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-love">
@@ -128,7 +128,7 @@ require_once 'views/header.php';
                 </span>
               </div>
               <div class="relative">
-                <button title="Confus" type="button" onclick="react(<?= $post['id'] ?>, 'confused')" class="transition-all text-4xl hover:scale-110 dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Confus" type="button" onclick="react(<?= $post['id'] ?>, 'confused')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
                   😕
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-confused">
@@ -136,7 +136,7 @@ require_once 'views/header.php';
                 </span>
               </div>
               <div class="relative">
-                <button title="Geek" type="button" onclick="react(<?= $post['id'] ?>, 'nerd')" class="transition-all text-4xl hover:scale-110 dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Geek" type="button" onclick="react(<?= $post['id'] ?>, 'nerd')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
                   🤓
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-nerd">
@@ -146,15 +146,17 @@ require_once 'views/header.php';
             </div>
           <?php } ?>
 
-          <hr class="border-[#4C4F69]/20 dark:border-[#CAD3F5]/20 my-4">
+          <hr class="border-[#4C4F69]/20 dark:border-[#CAD3F5]/20">
 
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4 py-4">
             <?php if (isset($_SESSION['user'])) { ?>
-              <form class="comment-form flex items-center gap-2">
+              <form class="comment-form flex items-center gap-6 p-4">
                 <input type="hidden" name="postId" value="<?= $post['id'] ?>">
-                <textarea class="w-full" name="content" placeholder="Commentaire" required></textarea>
-                <button type="submit" class="bg-blue-500 text-white hover:underline p-2">
-                  Envoyer
+                <textarea class="w-full bg-transparent outline-none bg-[#e6e9ef] dark:bg-[#1e2030] p-4 rounded-xl" name="content" placeholder="Écrire un commentaire..." required></textarea>
+                <button type="submit" class="p-4 rounded-full text-[#4C4F69] bg-[#E6E9EF] dark:bg-[#373A4D] dark:text-[#CAD3F5]">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="currentColor" />
+                  </svg>
                 </button>
               </form>
             <?php } ?>
@@ -168,6 +170,9 @@ require_once 'views/header.php';
 </main>
 
 <script>
+  const authenticated = <?= isset($_SESSION['user']) ? 'true' : 'false' ?>;
+  const userID = <?= isset($_SESSION['user']) ? $_SESSION['user']['id'] : -1 ?>;
+
   async function handleModify (id, button) {
     const titleElement = document.getElementById(id + '-title');
     const contentElement = document.getElementById(id + '-content');
@@ -229,16 +234,39 @@ require_once 'views/header.php';
 
   const renderComments = (comments, postId) => {
     const container = document.getElementById(`comments-container-${postId}`);
-    container.innerHTML = '';
+    
+    // Aucun commentaire à afficher.
+    if (comments.length === 0) {
+      let html = `
+        <div class="text-center pb-2">
+          <p>Aucun commentaire pour le moment.</p>
+      `;
+
+      if (authenticated) {
+        html += `
+          <p class="opacity-70 font-medium text-[#8839ef] dark:text-[#c6a0f6]">Soyez le premier à commenter !</p>
+        `;
+      }
+      else {
+        html += `
+          <a href="hover:underline text-[#8839ef] dark:text-[#c6a0f6]">Connectez-vous pour commenter.</a>
+        `;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+
+      return;
+    } else container.innerHTML = "";
 
     for (const comment of comments) {
       const div = document.createElement('div');
-      div.classList.add('bg-white', 'p-4', 'rounded-md');
+      div.classList.add('py-4', 'px-6', 'dark:bg-[#1e2030]/20', 'bg-[#e6e9ef]/50');
       div.dataset.commentId = comment.id;
 
       div.innerHTML = `
-        <p>${comment.nom_utilisateur} le ${new Date(comment.date_commentaire).toLocaleString("fr-FR")} à dit :</p>
-        <p>${comment.contenu}</p>
+        <p class="text-lg mb-1"><a class="hover:underline text-[#8839ef] dark:text-[#c6a0f6]" href="/?c=user&a=profile&id=${comment.utilisateur_id}">${comment.nom_utilisateur}</a> <span class="opacity-75">le ${new Date(comment.date_commentaire).toLocaleString("fr-FR")}</span></p>
+        <p>${comment.contenu.trim() || '<i class="italic opacity-50">Le commentaire a été laissé vide.</i>'}</p>
       `;
 
       container.appendChild(div);
@@ -280,7 +308,7 @@ require_once 'views/header.php';
     const data = await response.json();
 
     for (const reaction of data) {
-      if (reaction.utilisateur_id === <?= $_SESSION['user']['id'] ?>) {
+      if (reaction.utilisateur_id === userID) {
         if (postId in whereIReacted) {
           whereIReacted[postId].push(reaction.contenu);
         }

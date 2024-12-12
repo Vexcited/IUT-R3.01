@@ -13,9 +13,9 @@
 
   <title>PupilleNetwork</title>
 </head>
-<body class="bg-[#EFF1F5] text-[#4c4f69] dark:bg-[#24273A] dark:text-[#cad3f5]">
+<body class="bg-[#EFF1F5] text-[#4c4f69] dark:bg-[#24273A] dark:text-[#cad3f5] transition-colors">
   
-<header class="px-4 py-6 border-b border-[#4C4F69]/20 dark:border-[#CAD3F5]/20 max-w-[600px] mx-auto sticky top-0 bg-[#EFF1F5] dark:bg-[#24273A] z-10">
+<header class="px-4 py-6 border-b border-[#4C4F69]/20 dark:border-[#CAD3F5]/20 max-w-[600px] mx-auto sticky top-0 bg-[#EFF1F5] dark:bg-[#24273A] z-10 transition-colors">
   <div class="flex items-center gap-6 justify-between" id="header-main">
     <a class="shrink-0" href="/">
       <svg class="block dark:hidden" width="134" height="28" viewBox="0 0 134 28" fill="none" xmlns="http://www.w3.org/2000/svg">
