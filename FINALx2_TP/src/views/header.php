@@ -141,10 +141,10 @@ $action = $_GET['a'] ?? 'index';
 
   const createUserTemplate = (user) => {
     return `
-      <div class="flex flex-col px-4 py-2">
+      <a href="/?c=user&a=profile&id=${user.id}" class="flex flex-col px-4 py-2">
         <h3><b class="font-bold">UTILISATEUR:</b> ${user.nom}</h3>
         <p class="text-sm opacity-50">Inscrit depuis le ${new Date(`${user.date_inscription}Z`).toLocaleString("fr-FR")}</p>
-      </div>
+      </a>
     `;
   };
 
