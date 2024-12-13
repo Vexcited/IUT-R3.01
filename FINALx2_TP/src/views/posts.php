@@ -51,7 +51,7 @@ require_once 'views/header.php';
   <section class="px-4">
     <div class="flex flex-col gap-4">
       <?php foreach ($posts as $post): ?>
-        <div class="rounded-3xl rounded-3xl border border-[#4C4F69]/20 dark:border-[#CAD3F5]/20" data-post-id="<?= $post['id'] ?>">
+        <div class="rounded-3xl rounded-3xl border border-[#4C4F69]/20 dark:border-[#CAD3F5]/20" data-post-id="<?= $post['id'] ?>" style="scroll-margin-top: 100px">
           <div class="py-4 px-6 flex items-center gap-2">
             <p class="text-sm">
               <span class="opacity-75">Publié par</span> <a href="/?c=user&a=profile&id=<?= $post['utilisateur_id'] ?>" class="hover:underline text-[#8839ef] dark:text-[#c6a0f6]"><?= $post['nom_utilisateur'] ?></a> <span class="opacity-75">le <?= Date::timestampToLocal($post['date_publication']) ?></span>
@@ -261,6 +261,7 @@ require_once 'views/header.php';
       const div = document.createElement('div');
       div.classList.add('py-4', 'px-6', 'dark:bg-[#1e2030]/20', 'bg-[#e6e9ef]/50');
       div.dataset.commentId = comment.id;
+      div.style.scrollMarginTop = "100px";
 
       div.innerHTML = `
         <p class="text-lg mb-1"><a class="hover:underline text-[#8839ef] dark:text-[#c6a0f6]" href="/?c=user&a=profile&id=${comment.utilisateur_id}">${comment.nom_utilisateur}</a> <span class="opacity-75">le ${new Date(`${comment.date_commentaire}Z`).toLocaleString("fr-FR")}</span></p>

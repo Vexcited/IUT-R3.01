@@ -67,7 +67,8 @@ $action = $_GET['a'] ?? 'index';
   <div class="flex items-center gap-2 justify-center hidden" id="header-search">
     <div class="relative w-full">
       <input onclick="openLiveSearch()" onblur="closeLiveSearch()" class="w-full rounded-full h-[40px] bg-transparent px-4 border-[#4C4F69]/20 dark:border-[#CAD3F5]/20 border outline-none" type="text" oninput="handleSearch(this.value)">
-      <div id="live-search-container" class="absolute top-[calc(40px+12px)] inset-x-0 border z-10 bg-gray-50 rounded-lg p-2 hidden">
+      <div id="live-search-container" class="absolute top-[calc(40px+12px)] inset-x-0 border border-[#4C4F69]/20 dark:border-[#CAD3F5]/20 z-10 bg-[#eff1f5] dark:bg-[#252739] rounded-lg p-2 hidden shadow-xl">
+        <p class="text-center opacity-80 py-2">Entrez du texte pour commencer une recherche.</p>  
       </div>
     </div>
 
@@ -85,13 +86,17 @@ $action = $_GET['a'] ?? 'index';
 
 <script>
   const liveSearchContainer = document.getElementById('live-search-container');
+  const SEARCH_EMPTY_TEMPLATE = liveSearchContainer.innerHTML; // default HTML is the empty template.
+  const SEARCH_NO_RESULTS_TEMPLATE = `
+    <p class="text-center opacity-80 py-2">Aucun élément trouvé pour votre recherche.</p>  
+  `;
+
   const handleSearch = async (value) => {
-    if (value.trim() === "") {
-      closeLiveSearch();
+    if (value.trim() === "") { // is empty
+      liveSearchContainer.innerHTML = SEARCH_EMPTY_TEMPLATE;
       return;
     }
 
-    openLiveSearch();
     const results = await findResults(value);
     renderResults(results);
   }
@@ -103,6 +108,7 @@ $action = $_GET['a'] ?? 'index';
   const closeLiveSearch = () => {
     setTimeout(() => {
       liveSearchContainer.classList.add('hidden');
+      toggleSearchMenu();
     }, 100)
   }
 
@@ -126,12 +132,16 @@ $action = $_GET['a'] ?? 'index';
       container.innerHTML += createCommentTemplate(comment);
     }
 
+    if (container.innerHTML.trim() === "") { // no results available
+      container.innerHTML = SEARCH_NO_RESULTS_TEMPLATE;  
+    }
+
     liveSearchContainer.appendChild(container);
   }
 
   const createPostTemplate = (post) => {
     return `
-      <div onclick="scrollToPost(${post.id})" class="flex flex-col cursor-pointer hover:bg-gray-100 rounded-lg px-4 py-2">
+      <div onclick="scrollToPost(${post.id})" class="flex flex-col cursor-pointer hover:bg-[#e6e9ef] dark:hover:bg-[#1e2030] transition-colors rounded-md px-4 py-2">
         <h3><b class="font-bold">POST:</b> ${post.titre}</h3>
         <p>${post.contenu}</p>
         <p class="text-sm opacity-50">Posté par ${post.nom_utilisateur} le ${new Date(`${post.date_publication}Z`).toLocaleString("fr-FR")}</p>
@@ -141,7 +151,7 @@ $action = $_GET['a'] ?? 'index';
 
   const createUserTemplate = (user) => {
     return `
-      <a href="/?c=user&a=profile&id=${user.id}" class="flex flex-col px-4 py-2">
+      <a href="/?c=user&a=profile&id=${user.id}" class="flex flex-col hover:bg-[#e6e9ef] dark:hover:bg-[#1e2030] transition-colors rounded-md px-4 py-2">
         <h3><b class="font-bold">UTILISATEUR:</b> ${user.nom}</h3>
         <p class="text-sm opacity-50">Inscrit depuis le ${new Date(`${user.date_inscription}Z`).toLocaleString("fr-FR")}</p>
       </a>
@@ -150,7 +160,7 @@ $action = $_GET['a'] ?? 'index';
 
   const createCommentTemplate = (comment) => {
     return `
-      <div onclick="scrollToComment(${comment.id})" class="flex flex-col cursor-pointer hover:bg-gray-100 rounded-lg px-4 py-2">
+      <div onclick="scrollToComment(${comment.id})" class="flex flex-col cursor-pointer hover:bg-[#e6e9ef] dark:hover:bg-[#1e2030] transition-colors rounded-md px-4 py-2">
         <p><b class="font-bold">COMMENTAIRE:</b> ${comment.contenu}</p>
         <p class="text-sm opacity-50">Commenté le ${new Date(`${comment.date_commentaire}Z`).toLocaleString("fr-FR")} par ${comment.nom_utilisateur}</p>
       </div>
@@ -159,14 +169,12 @@ $action = $_GET['a'] ?? 'index';
 
   const scrollToPost = (id) => {
     const element = document.querySelector(`[data-post-id="${id}"]`);
-    element.scrollIntoView({ behavior: 'smooth' });
-    closeLiveSearch();
+    element.scrollIntoView({ behavior: 'smooth',  });
   }
 
   const scrollToComment = (id) => {
     const element = document.querySelector(`[data-comment-id="${id}"]`);
     element.scrollIntoView({ behavior: 'smooth' });
-    closeLiveSearch();
   }
 </script>
 
