@@ -134,7 +134,7 @@ $action = $_GET['a'] ?? 'index';
       <div onclick="scrollToPost(${post.id})" class="flex flex-col cursor-pointer hover:bg-gray-100 rounded-lg px-4 py-2">
         <h3><b class="font-bold">POST:</b> ${post.titre}</h3>
         <p>${post.contenu}</p>
-        <p class="text-sm opacity-50">Posté par ${post.nom_utilisateur} le ${new Date(post.date_publication).toLocaleString("fr-FR")}</p>
+        <p class="text-sm opacity-50">Posté par ${post.nom_utilisateur} le ${new Date(`${post.date_publication}Z`).toLocaleString("fr-FR")}</p>
       </div>
     `;
   };
@@ -143,7 +143,7 @@ $action = $_GET['a'] ?? 'index';
     return `
       <div class="flex flex-col px-4 py-2">
         <h3><b class="font-bold">UTILISATEUR:</b> ${user.nom}</h3>
-        <p class="text-sm opacity-50">Inscrit depuis le ${new Date(user.date_inscription).toLocaleString("fr-FR")}</p>
+        <p class="text-sm opacity-50">Inscrit depuis le ${new Date(`${user.date_inscription}Z`).toLocaleString("fr-FR")}</p>
       </div>
     `;
   };
@@ -152,7 +152,7 @@ $action = $_GET['a'] ?? 'index';
     return `
       <div onclick="scrollToComment(${comment.id})" class="flex flex-col cursor-pointer hover:bg-gray-100 rounded-lg px-4 py-2">
         <p><b class="font-bold">COMMENTAIRE:</b> ${comment.contenu}</p>
-        <p class="text-sm opacity-50">Commenté le ${new Date(comment.date_commentaire).toLocaleString("fr-FR")} par ${comment.nom_utilisateur}</p>
+        <p class="text-sm opacity-50">Commenté le ${new Date(`${comment.date_commentaire}Z`).toLocaleString("fr-FR")} par ${comment.nom_utilisateur}</p>
       </div>
     `;
   };

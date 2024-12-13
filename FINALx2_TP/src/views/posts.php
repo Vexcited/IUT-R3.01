@@ -257,7 +257,7 @@ require_once 'views/header.php';
       div.dataset.commentId = comment.id;
 
       div.innerHTML = `
-        <p class="text-lg mb-1"><a class="hover:underline text-[#8839ef] dark:text-[#c6a0f6]" href="/?c=user&a=profile&id=${comment.utilisateur_id}">${comment.nom_utilisateur}</a> <span class="opacity-75">le ${new Date(comment.date_commentaire).toLocaleString("fr-FR")}</span></p>
+        <p class="text-lg mb-1"><a class="hover:underline text-[#8839ef] dark:text-[#c6a0f6]" href="/?c=user&a=profile&id=${comment.utilisateur_id}">${comment.nom_utilisateur}</a> <span class="opacity-75">le ${new Date(`${comment.date_commentaire}Z`).toLocaleString("fr-FR")}</span></p>
         <p>${comment.contenu.trim() || '<i class="italic opacity-50">Le commentaire a été laissé vide.</i>'}</p>
       `;
 
@@ -271,20 +271,29 @@ require_once 'views/header.php';
     renderComments(data, postId)
   };
 
-  const incrementReaction = (postId, reactionWord) => {
+  const incrementReactionOnDOM = (postId, reactionWord) => {
     const element = document.getElementById(`react-value-${postId}-${reactionWord}`);
     element.innerText = parseInt(element.innerText) + 1;
   };
 
-  const decrementReaction = (postId, reactionWord) => {
+  const decrementReactionOnDOM = (postId, reactionWord) => {
     const element = document.getElementById(`react-value-${postId}-${reactionWord}`);
     element.innerText = parseInt(element.innerText) - 1;
   };
 
-  function removeReaction(postId, reactionWord) {
+  const removeReactionFromCache = (postId, reactionWord) => {
     const index = whereIReacted[postId].indexOf(reactionWord);
-    if (index >= 0) {
+    if (index !== -1) {
       whereIReacted[postId].splice(index, 1);
+    }
+  }
+
+  const addReactionToCache = (postId, reactionWord) => {
+    if (postId in whereIReacted) {
+      whereIReacted[postId].push(reactionWord);
+    }
+    else {
+      whereIReacted[postId] = [reactionWord];
     }
   }
 
@@ -292,20 +301,14 @@ require_once 'views/header.php';
   const react = async (postId, reactionWord) => {
     if (postId in whereIReacted && whereIReacted[postId].includes(reactionWord)) {
       await fetch(`/?c=reactions&a=delete&postId=${postId}&reaction=${reactionWord}`);
-      removeReaction(postId, reactionWord);
-      decrementReaction(postId, reactionWord);
-      return;
+      removeReactionFromCache(postId, reactionWord);
+      decrementReactionOnDOM(postId, reactionWord);
     }
-
-    await fetch(`/?c=reactions&a=create&postId=${postId}&reaction=${reactionWord}`);
-
-    if (postId in whereIReacted) {
-      whereIReacted[postId].push(reactionWord);
-    } else {
-      whereIReacted[postId] = [reactionWord];
+    else {
+      await fetch(`/?c=reactions&a=create&postId=${postId}&reaction=${reactionWord}`);
+      addReactionToCache(postId, reactionWord);
+      incrementReactionOnDOM(postId, reactionWord);
     }
-
-    incrementReaction(postId, reactionWord);
   };
 
   const fetchReactions = async (postId) => {
@@ -321,7 +324,7 @@ require_once 'views/header.php';
         }
       }
 
-      incrementReaction(postId, reaction.contenu);
+      incrementReactionOnDOM(postId, reaction.contenu);
     }
   };
 
