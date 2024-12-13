@@ -13,11 +13,10 @@ require_once 'views/header.php';
 
     <section class="px-4">
       <form action="/?c=posts&a=create" method="POST"
-        class="flex flex-col gap-2 max-w-[600px] py-4 px-6 mx-auto rounded-3xl border border-[#4C4F69]/20 dark:border-[#CAD3F5]/20"
-      >
+        class="flex flex-col gap-2 max-w-[600px] py-4 px-6 mx-auto rounded-3xl border border-[#4C4F69]/20 dark:border-[#CAD3F5]/20">
         <input class="bg-transparent text-xl font-medium outline-none" type="text" placeholder="Un titre pour votre publication" name="title" required>
         <textarea class="bg-transparent outline-none" placeholder="Écrivez ce qu'il vous passe par la tête..." name="content" required></textarea>
-    
+
         <button type="submit" class="hover:bg-[#8839EF] bg-[#8839EF]/90 text-[#EFF1F5] dark:hover:bg-[#c6a0f6] dark:bg-[#c6a0f6]/90 dark:text-[#24273a] py-2 px-5 w-fit ml-auto rounded-full">
           Poster
         </button>
@@ -26,8 +25,7 @@ require_once 'views/header.php';
   <?php } else { ?>
     <section class="px-4">
       <div
-        class="flex flex-col gap-2 max-w-[600px] py-4 px-6 mx-auto rounded-3xl border border-[#4C4F69]/20 dark:border-[#CAD3F5]/20"
-      >
+        class="flex flex-col gap-2 max-w-[600px] py-4 px-6 mx-auto rounded-3xl border border-[#4C4F69]/20 dark:border-[#CAD3F5]/20">
         <h2 class="text-2xl font-bold">
           Se connecter pour publier
         </h2>
@@ -35,7 +33,7 @@ require_once 'views/header.php';
           Vous devez être connecté pour pouvoir publier un post.
           Si vous n'avez pas de compte, vous pouvez vous inscrire.
         </p>
-      
+
         <div class="flex justify-end items-center gap-3">
           <a href="/?c=user&a=d-signup" class="hover:bg-[#e6e9ef] text-[#4c4f69] dark:hover:bg-[#1e2030] dark:text-[#b8c0e0] py-2 px-4 w-fit rounded-full transition-colors">
             S'inscrire
@@ -44,10 +42,10 @@ require_once 'views/header.php';
             Se connecter
           </a>
         </div>
-      </form>
+        </form>
     </section>
   <?php } ?>
-  
+
   <hr class="border-[#4C4F69]/20 dark:border-[#CAD3F5]/20 my-6">
 
   <section class="px-4">
@@ -64,8 +62,7 @@ require_once 'views/header.php';
                 <a
                   href="/?c=posts&a=remove&id=<?= $post['id'] ?>"
                   class="dark:hover:text-[#ed8796] hover:text-[#d20f39] transition-colors"
-                  title="Supprimer le post"
-                >
+                  title="Supprimer le post">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 4H15.5L14.5 3H9.5L8.5 4H5V6H19M6 19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19V7H6V19Z" fill="currentColor" />
                   </svg>
@@ -73,20 +70,19 @@ require_once 'views/header.php';
                 <button
                   type="button"
                   onclick="handleModify(<?= $post['id'] ?>, this)"
-                  data-state="non-active"
-                >
+                  data-state="non-active">
                   <svg class="post-modify-non-active-logo" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20.71 7.04C21.1 6.65 21.1 6 20.71 5.63L18.37 3.29C18 2.9 17.35 2.9 16.96 3.29L15.12 5.12L18.87 8.87M3 17.25V21H6.75L17.81 9.93L14.06 6.18L3 17.25Z" fill="currentColor" />
                   </svg>
 
                   <svg class="post-modify-active-logo hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 7.00003L9 19L3.5 13.5L4.91 12.09L9 16.17L19.59 5.59003L21 7.00003Z" fill="currentColor"/>
+                    <path d="M21 7.00003L9 19L3.5 13.5L4.91 12.09L9 16.17L19.59 5.59003L21 7.00003Z" fill="currentColor" />
                   </svg>
                 </button>
               </div>
             <?php } ?>
           </div>
-            
+
           <hr class="border-[#4C4F69]/20 dark:border-[#CAD3F5]/20">
 
           <div class="p-6">
@@ -173,7 +169,7 @@ require_once 'views/header.php';
   const authenticated = <?= isset($_SESSION['user']) ? 'true' : 'false' ?>;
   const userID = <?= isset($_SESSION['user']) ? $_SESSION['user']['id'] : -1 ?>;
 
-  async function handleModify (id, button) {
+  async function handleModify(id, button) {
     const titleElement = document.getElementById(id + '-title');
     const contentElement = document.getElementById(id + '-content');
 
@@ -185,12 +181,11 @@ require_once 'views/header.php';
     if (isNonActive) {
       titleElement.setAttribute('contenteditable', true);
       contentElement.setAttribute('contenteditable', true);
-      
+
       button.dataset.state = "active";
       nonActiveLogo.classList.add('hidden');
       activeLogo.classList.remove('hidden');
-    }
-    else {
+    } else {
       titleElement.setAttribute('contenteditable', false);
       contentElement.setAttribute('contenteditable', false);
 
@@ -232,7 +227,7 @@ require_once 'views/header.php';
 
   const renderComments = (comments, postId) => {
     const container = document.getElementById(`comments-container-${postId}`);
-    
+
     // Aucun commentaire à afficher.
     if (comments.length === 0) {
       let html = `
@@ -244,8 +239,7 @@ require_once 'views/header.php';
         html += `
           <p class="opacity-70 font-medium text-[#8839ef] dark:text-[#c6a0f6]">Soyez le premier à commenter !</p>
         `;
-      }
-      else {
+      } else {
         html += `
           <a href="hover:underline text-[#8839ef] dark:text-[#c6a0f6]">Connectez-vous pour commenter.</a>
         `;
@@ -282,10 +276,24 @@ require_once 'views/header.php';
     element.innerText = parseInt(element.innerText) + 1;
   };
 
+  const decrementReaction = (postId, reactionWord) => {
+    const element = document.getElementById(`react-value-${postId}-${reactionWord}`);
+    element.innerText = parseInt(element.innerText) - 1;
+  };
+
+  function removeReaction(postId, reactionWord) {
+    const index = whereIReacted[postId].indexOf(reactionWord);
+    if (index >= 0) {
+      whereIReacted[postId].splice(index, 1);
+    }
+  }
+
   const whereIReacted = {};
   const react = async (postId, reactionWord) => {
     if (postId in whereIReacted && whereIReacted[postId].includes(reactionWord)) {
-      alert("Vous avez déjà réagi avec cette émotion.");
+      await fetch(`/?c=reactions&a=delete&postId=${postId}&reaction=${reactionWord}`);
+      removeReaction(postId, reactionWord);
+      decrementReaction(postId, reactionWord);
       return;
     }
 
@@ -293,11 +301,10 @@ require_once 'views/header.php';
 
     if (postId in whereIReacted) {
       whereIReacted[postId].push(reactionWord);
-    }
-    else {
+    } else {
       whereIReacted[postId] = [reactionWord];
     }
-    
+
     incrementReaction(postId, reactionWord);
   };
 
@@ -309,8 +316,7 @@ require_once 'views/header.php';
       if (reaction.utilisateur_id === userID) {
         if (postId in whereIReacted) {
           whereIReacted[postId].push(reaction.contenu);
-        }
-        else {
+        } else {
           whereIReacted[postId] = [reaction.contenu];
         }
       }
