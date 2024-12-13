@@ -85,7 +85,7 @@ require_once 'views/header.php';
 
           <hr class="border-[#4C4F69]/20 dark:border-[#CAD3F5]/20">
 
-          <div class="p-6">
+          <div class="p-6 flex flex-col gap-2">
             <h2 class="text-2xl font-medium" id="<?= $post['id'] . '-title' ?>">
               <?= $post['titre'] ?>
             </h2>
