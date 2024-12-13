@@ -99,8 +99,14 @@ require_once 'views/header.php';
             <hr class="border-[#4C4F69]/20 dark:border-[#CAD3F5]/20">
 
             <div class="mt-4 mb-6 flex items-center justify-center gap-4">
+              <button title="J'aime" type="button" onclick="react(<?= $post['id'] ?>, 'like')" class="reaction-button transition-all text-lg hover:scale-110 rounded-full px-4 py-2 flex items-center gap-3">
+                J'aime
+                <span id="react-value-<?= $post['id'] ?>-like">
+                  0
+                </span>
+              </button>
               <div class="relative">
-                <button title="Like" type="button" onclick="react(<?= $post['id'] ?>, 'up')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Pouce en l'air" type="button" onclick="react(<?= $post['id'] ?>, 'up')" class="reaction-button transition-all text-4xl hover:scale-110 rounded-full w-[60px] h-[60px]">
                   👍
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-up">
@@ -108,7 +114,7 @@ require_once 'views/header.php';
                 </span>
               </div>
               <div class="relative">
-                <button title="Amusant" type="button" onclick="react(<?= $post['id'] ?>, 'lmfao')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Amusant" type="button" onclick="react(<?= $post['id'] ?>, 'lmfao')" class="reaction-button transition-all text-4xl hover:scale-110 rounded-full w-[60px] h-[60px]">
                   🤣
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-lmfao">
@@ -116,7 +122,7 @@ require_once 'views/header.php';
                 </span>
               </div>
               <div class="relative">
-                <button title="Adore" type="button" onclick="react(<?= $post['id'] ?>, 'love')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Adore" type="button" onclick="react(<?= $post['id'] ?>, 'love')" class="reaction-button transition-all text-4xl hover:scale-110 rounded-full w-[60px] h-[60px]">
                   ❤️
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-love">
@@ -124,7 +130,7 @@ require_once 'views/header.php';
                 </span>
               </div>
               <div class="relative">
-                <button title="Confus" type="button" onclick="react(<?= $post['id'] ?>, 'confused')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Confus" type="button" onclick="react(<?= $post['id'] ?>, 'confused')" class="reaction-button transition-all text-4xl hover:scale-110 rounded-full w-[60px] h-[60px]">
                   😕
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-confused">
@@ -132,7 +138,7 @@ require_once 'views/header.php';
                 </span>
               </div>
               <div class="relative">
-                <button title="Geek" type="button" onclick="react(<?= $post['id'] ?>, 'nerd')" class="transition-all text-4xl hover:scale-110 bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50 rounded-full w-[60px] h-[60px]">
+                <button title="Geek" type="button" onclick="react(<?= $post['id'] ?>, 'nerd')" class="reaction-button transition-all text-4xl hover:scale-110 rounded-full w-[60px] h-[60px]">
                   🤓
                 </button>
                 <span class="absolute -bottom-1 -right-1 text-sm bg-black text-white rounded-full px-2" id="react-value-<?= $post['id'] ?>-nerd">
@@ -271,14 +277,43 @@ require_once 'views/header.php';
     renderComments(data, postId)
   };
 
+  const DEFAULT_REACTION_CLASSLIST = "bg-[#e6e9ef] dark:hover:bg-[#373A4D] dark:bg-[#373A4D]/50".split(" ");
+  const SELECTED_REACTION_CLASSLIST = "bg-[#8839ef]/80 text-[#eff1f5] dark:bg-[#c6a0f6] dark:text-[#24273a]".split(" ");
+
+  document.querySelectorAll(".reaction-button").forEach((element) => {
+    element.classList.add(...DEFAULT_REACTION_CLASSLIST)
+  })
+
+  const getReactionParentButton = (element) => {
+    let container = element.parentElement;
+    if (container.tagName === 'BUTTON') return container;
+
+    return container.querySelector("button");
+  }
+
   const incrementReactionOnDOM = (postId, reactionWord) => {
     const element = document.getElementById(`react-value-${postId}-${reactionWord}`);
     element.innerText = parseInt(element.innerText) + 1;
+
+    const container = getReactionParentButton(element);
+
+    if (didUserReacted(postId, reactionWord)) {
+      container.classList.remove(...DEFAULT_REACTION_CLASSLIST);
+      container.classList.add(...SELECTED_REACTION_CLASSLIST);
+    }
+    else {
+      container.classList.remove(...SELECTED_REACTION_CLASSLIST);
+      container.classList.add(...DEFAULT_REACTION_CLASSLIST);
+    }
   };
 
   const decrementReactionOnDOM = (postId, reactionWord) => {
     const element = document.getElementById(`react-value-${postId}-${reactionWord}`);
     element.innerText = parseInt(element.innerText) - 1;
+
+    const container = getReactionParentButton(element);
+    container.classList.remove(...SELECTED_REACTION_CLASSLIST);
+    container.classList.add(...DEFAULT_REACTION_CLASSLIST);
   };
 
   const removeReactionFromCache = (postId, reactionWord) => {
@@ -297,9 +332,13 @@ require_once 'views/header.php';
     }
   }
 
+  const didUserReacted = (postId, reactionWord) => {
+    return postId in whereIReacted && whereIReacted[postId].includes(reactionWord)
+  }
+
   const whereIReacted = {};
   const react = async (postId, reactionWord) => {
-    if (postId in whereIReacted && whereIReacted[postId].includes(reactionWord)) {
+    if (didUserReacted(postId, reactionWord)) {
       await fetch(`/?c=reactions&a=delete&postId=${postId}&reaction=${reactionWord}`);
       removeReactionFromCache(postId, reactionWord);
       decrementReactionOnDOM(postId, reactionWord);
@@ -317,11 +356,7 @@ require_once 'views/header.php';
 
     for (const reaction of data) {
       if (reaction.utilisateur_id === userID) {
-        if (postId in whereIReacted) {
-          whereIReacted[postId].push(reaction.contenu);
-        } else {
-          whereIReacted[postId] = [reaction.contenu];
-        }
+        addReactionToCache(postId, reaction.contenu)
       }
 
       incrementReactionOnDOM(postId, reaction.contenu);
