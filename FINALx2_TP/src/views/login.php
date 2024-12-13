@@ -9,7 +9,7 @@ require_once 'views/header.php';
     <div class="flex flex-col">
       <h1 class="text-xl font-bold">Connectez vous</h1>
       <p>
-        Vous n'avez pas de compte ? <a href="/?c=user&a=d-login" class="dark:text-[#c6a0f6] text-[#8839ef] hover:underline">Créez en un aujourd'hui !</a>
+        Vous n'avez pas de compte ? <a href="/?c=user&a=d-signup" class="dark:text-[#c6a0f6] text-[#8839ef] hover:underline">Créez en un aujourd'hui !</a>
       </p>
     </div>
 
