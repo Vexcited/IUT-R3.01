@@ -183,27 +183,25 @@ require_once 'views/header.php';
     const activeLogo = button.querySelector('.post-modify-active-logo');
 
     if (isNonActive) {
-      titleElement.contentEditable = "true";
-      contentElement.contentEditable = "true";
+      titleElement.setAttribute('contenteditable', true);
+      contentElement.setAttribute('contenteditable', true);
       
       button.dataset.state = "active";
       nonActiveLogo.classList.add('hidden');
       activeLogo.classList.remove('hidden');
     }
     else {
-      titleElement.contentEditable = "false";
-      contentElement.contentEditable = "false";
+      titleElement.setAttribute('contenteditable', false);
+      contentElement.setAttribute('contenteditable', false);
+
+      const form = new FormData();
+      form.append('id', id);
+      form.append('title', titleElement.innerText);
+      form.append('content', contentElement.innerText);
 
       const response = await fetch('/?c=posts&a=modify', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          id,
-          title: titleElement.innerText,
-          content: contentElement.innerText
-        })
+        body: form
       });
 
       button.dataset.state = "non-active";

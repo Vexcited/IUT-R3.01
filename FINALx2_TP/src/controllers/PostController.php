@@ -35,14 +35,13 @@ class PostController {
   }
 
   public function modify () {
-    $data = json_decode(file_get_contents('php://input'), true);
     
-    $postId = $data['id'];
-    $postContent = $data['content'];
-    $postTitle = $data['title'];
-
-    if (isset($_SESSION['user'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user'])) {
+      $postId = $_POST['id'];
+      $postTitle = $_POST['title'];
+      $postContent = $_POST['content'];
       $userId = $_SESSION['user']['id'];
+
       $this->postModel->modify($postId, $postTitle, $postContent, $userId);
     }
 

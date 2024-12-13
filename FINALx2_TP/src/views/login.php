@@ -2,9 +2,9 @@
 require_once 'views/header.php';
 ?>
 
-<main class="container mx-auto">
+<main>
   <form action="/?c=user&a=login" method="POST"
-    class="flex flex-col gap-6 px-4 py-6 mx-auto max-w-[600px]"
+    class="flex flex-col gap-6 p-6 mx-auto max-w-[600px]"
   >
     <div class="flex flex-col">
       <h1 class="text-xl font-bold">Connectez vous</h1>

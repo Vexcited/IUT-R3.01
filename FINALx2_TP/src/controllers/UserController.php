@@ -45,4 +45,31 @@ class UserController {
     session_destroy();
     header('Location: /');
   }
+
+  public function profile () {
+    $id = $_GET['id'];
+    $user = $this->userModel->findById($id);
+    
+    if ($user) {
+      require_once 'views/profile.php';
+    }
+    else {
+      header('Location: /');
+    }
+  }
+
+  public function modify () {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user'])) {
+      $name = $_POST['name'];
+      $email = $_POST['email'];
+      $userId = $_SESSION['user']['id'];
+
+      $this->userModel->update($name, $email, $userId);
+      $_SESSION['user']['nom'] = $name;
+      $_SESSION['user']['email'] = $email;
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'ok']);
+  }
 }

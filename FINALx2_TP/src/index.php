@@ -38,6 +38,12 @@ switch ($route) {
       case 'logout':
         $controller->signout();
         break;
+      case 'profile':
+        $controller->profile();
+        break;
+      case 'modify':
+        $controller->modify();
+        break;
     }
 
     break;
