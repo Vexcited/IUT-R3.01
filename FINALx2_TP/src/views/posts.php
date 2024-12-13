@@ -247,7 +247,7 @@ require_once 'views/header.php';
         `;
       } else {
         html += `
-          <a href="hover:underline text-[#8839ef] dark:text-[#c6a0f6]">Connectez-vous pour commenter.</a>
+          <a href="/?c=user&a=d-login" class="hover:underline text-[#8839ef] dark:text-[#c6a0f6]">Connectez-vous pour commenter.</a>
         `;
       }
 
