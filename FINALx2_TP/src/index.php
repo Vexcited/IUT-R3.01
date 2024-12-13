@@ -81,6 +81,9 @@ switch ($route) {
       case 'create':
         $controller->create();
         break;
+      case 'delete':
+        $controller->delete();
+        break;
       case 'read':
         $controller->read();
         break;
